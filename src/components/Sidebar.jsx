@@ -22,7 +22,7 @@ const Sidebar = () => {
       flexDirection: 'column'
     }}>
       <div style={{ marginBottom: '40px', textAlign: 'center' }}>
-        <h2 style={{ color: '#2ecc71', margin: 0 }}>DurianPro 10</h2>
+        <h2 style={{ color: '#2ecc71', margin: 0 }}>สวนทุเรียน (เตย)</h2>
         <small style={{ opacity: 0.6 }}>Expert Management System</small>
       </div>
 
