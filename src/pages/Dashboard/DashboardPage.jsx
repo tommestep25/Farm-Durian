@@ -37,27 +37,28 @@ const DashboardPage = () => {
   if (loading) return <div style={{ padding: '50px', textAlign: 'center' }}>กำลังโหลดข้อมูล...</div>;
 
   return (
-    <div style={{ padding: '30px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          <h2 style={{ margin: 0, color: '#0f172a' }}>🌴 ภาพรวมสวนทุเรียน</h2>
-          <p style={{ color: '#64748b' }}>สรุปสถานะล่าสุดจากฐานข้อมูล</p>
-        </div>
-        <button onClick={fetchDashboardData} style={refreshBtnStyle}>🔄 รีเฟรชข้อมูล</button>
+    <div style={{ padding: window.innerWidth <= 768 ? '15px' : '30px', backgroundColor: '#f8fafc', minHeight: '100vh' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <h2 style={{ margin: 0, color: '#0f172a', fontSize: '1.4rem' }}>🌴 ภาพรวมสวน</h2>
       </div>
 
       {/* 4 Cards แสดงสถิติ */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '30px' }}>
-        <StatCard title="ต้นไม้ทั้งหมด" value={stats.totalTrees} color="#3b82f6" icon="🌳" />
+<div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: window.innerWidth <= 768 ? '1fr 1fr' : 'repeat(auto-fit, minmax(200px, 1fr))', 
+        gap: '12px', 
+        marginBottom: '20px' 
+      }}>
+        <StatCard title="ทั้งหมด" value={stats.totalTrees} color="#3b82f6" icon="🌳" />
         <StatCard title="ปกติ" value={stats.normal} color="#10b981" icon="✅" />
         <StatCard title="เสี่ยง" value={stats.risk} color="#f59e0b" icon="⚠️" />
-        <StatCard title="ต้องดูแลด่วน" value={stats.urgent} color="#ef4444" icon="🚨" />
+        <StatCard title="ด่วน" value={stats.urgent} color="#ef4444" icon="🚨" />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '25px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* กราฟสัดส่วน */}
         <div style={cardContainerStyle}>
-          <h3 style={{ margin: '0 0 15px 0' }}>📊 สัดส่วนสถานะสุขภาพ</h3>
+          <h3 style={{ fontSize: '1rem', marginBottom: '10px' }}>📊 สถิติสุขภาพ</h3>
           <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '20px', padding: '0 40px' }}>
             <div style={{ ...barStyle, height: `${stats.totalTrees > 0 ? (stats.normal / stats.totalTrees) * 100 : 0}%`, background: '#10b981' }}></div>
             <div style={{ ...barStyle, height: `${stats.totalTrees > 0 ? (stats.risk / stats.totalTrees) * 100 : 0}%`, background: '#f59e0b' }}></div>
@@ -67,16 +68,8 @@ const DashboardPage = () => {
 
         {/* กล่องแจ้งเตือน */}
         <div style={cardContainerStyle}>
-          <h3 style={{ margin: '0 0 15px 0', color: '#ef4444' }}>⚠️ แจ้งเตือนล่าสุด</h3>
-          <p style={{ fontSize: '14px', color: '#64748b' }}>
-            มีต้นไม้สถานะ URGENT ทั้งหมด {stats.urgent} ต้น
-          </p>
-          <button 
-            onClick={() => setShowModal(true)} 
-            style={viewAllBtnStyle}
-          >
-            ดูรายชื่อต้นที่มีปัญหา
-          </button>
+          <h3 style={{ fontSize: '1rem', color: '#ef4444', marginBottom: '10px' }}>⚠️ แจ้งเตือน</h3>
+          <button onClick={() => setShowModal(true)} style={viewAllBtnStyle}>ดูต้นที่มีปัญหา</button>
         </div>
       </div>
 

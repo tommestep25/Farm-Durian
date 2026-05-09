@@ -64,51 +64,46 @@ const loadHistory = async () => {
   };
 
   return (
-    <div style={{ maxWidth: '700px', margin: '20px auto', padding: '0 15px' }}>
-      {/* --- ส่วนฟอร์มบันทึก --- */}
-      <div style={{ background: '#fff', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-        <h2 style={{ color: '#27ae60', borderBottom: '2px solid #27ae60', paddingBottom: '10px', marginTop: 0 }}>
+    <div style={{ maxWidth: '700px', margin: '10px auto', padding: '0 10px' }}>
+      <div style={{ background: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <h2 style={{ color: '#27ae60', borderBottom: '2px solid #27ae60', paddingBottom: '10px', marginTop: 0, fontSize: '1.2rem' }}>
           🧪 บันทึกการใส่ปุ๋ย
         </h2>
         
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
-          <div>
-            <label style={{ fontWeight: 'bold' }}>รหัสต้นทุเรียน:</label>
-            <input 
-              type="text" 
-              value={log.treeId}
-              style={{...inputStyle, background: '#f9f9f9'}} 
-              disabled // ปิดไว้เพื่อให้ยึดตาม QR หรือเลือกมาจากหน้าคลัง
-            />
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
+          {/* ปรับ Grid ให้เป็น 1 คอลัมน์ในมือถือ */}
+          <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr', gap: '10px' }}>
+            <div>
+              <label style={{ fontWeight: 'bold' }}>รหัสต้นทุเรียน:</label>
+              <input type="text" value={log.treeId} style={{...inputStyle, background: '#f9f9f9'}} disabled />
+            </div>
             <div>
               <label style={{ fontWeight: 'bold' }}>วันที่ใส่:</label>
               <input type="date" value={log.date} style={inputStyle} onChange={(e) => setLog({...log, date: e.target.value})} required />
             </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr', gap: '10px' }}>
             <div>
               <label style={{ fontWeight: 'bold' }}>สูตรปุ๋ย:</label>
               <input type="text" value={log.formula} style={inputStyle} onChange={(e) => setLog({...log, formula: e.target.value})} />
             </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <div>
               <label style={{ fontWeight: 'bold' }}>ปริมาณ (กก./ต้น):</label>
               <input type="number" step="0.1" value={log.amount} style={inputStyle} onChange={(e) => setLog({...log, amount: e.target.value})} required />
             </div>
-            <div>
-              <label style={{ fontWeight: 'bold' }}>เป้าหมาย:</label>
-              <select style={inputStyle} value={log.target} onChange={(e) => setLog({...log, target: e.target.value})}>
-                <option value="เร่งใบ">เร่งใบ</option>
-                <option value="เร่งดอก">เร่งดอก</option>
-                <option value="ขยายผล">ขยายผล</option>
-              </select>
-            </div>
           </div>
 
-          <button type="submit" style={buttonStyle}>บันทึกข้อมูลปุ๋ย</button>
+          <div>
+            <label style={{ fontWeight: 'bold' }}>เป้าหมาย:</label>
+            <select style={{...inputStyle, height: '45px'}} value={log.target} onChange={(e) => setLog({...log, target: e.target.value})}>
+              <option value="เร่งใบ">เร่งใบ</option>
+              <option value="เร่งดอก">เร่งดอก</option>
+              <option value="ขยายผล">ขยายผล</option>
+            </select>
+          </div>
+
+          <button type="submit" style={{...buttonStyle, height: '50px', fontSize: '18px'}}>บันทึกข้อมูลปุ๋ย</button>
         </form>
       </div>
 
