@@ -37,7 +37,7 @@ const Sidebar = () => {
         display: 'flex',
         flexDirection: 'column',
         position: window.innerWidth <= 768 ? 'fixed' : 'relative',
-        left: isOpen || window.innerWidth > 768 ? '0' : '-260px',
+        left: isOpen || window.innerWidth > 768 ? '0' : '-300px',
         transition: '0.3s',
         height: '100vh',
         zIndex: 10000
