@@ -182,3 +182,27 @@
     border-right-color: var(--border);
   }
 }
+@media (max-width: 768px) {
+  /* ทำให้เนื้อหาหลักขยับมาชิดซ้ายเมื่อ Sidebar ถูกซ่อน */
+  .main-layout {
+    flex-direction: column !important;
+  }
+
+  .content-area {
+    margin-left: 0 !important;
+    padding: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* ปรับแต่งหัวข้อให้เล็กลงในมือถือ */
+  h1 {
+    font-size: 28px !important;
+  }
+  
+  /* ปรับการ์ดต้นไม้ให้เรียงแถวละ 1 ใบเต็มจอ */
+  .tree-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+}

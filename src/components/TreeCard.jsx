@@ -112,12 +112,12 @@ const actionUrl = `${getBaseUrl()}/tree-actions?treeId=${tree.treeId}`;
 
 // Styles สำหรับปุ่มและ Modal
 const actionBtnStyle = {
-  padding: '10px 5px',
+  padding: window.innerWidth <= 768 ? '15px 5px' : '10px 5px', // เพิ่มพื้นที่กดในมือถือ
   color: '#fff',
   border: 'none',
   borderRadius: '8px',
   cursor: 'pointer',
-  fontSize: '12px',
+  fontSize: window.innerWidth <= 768 ? '14px' : '12px', // ขยายตัวอักษรให้อ่านง่าย
   fontWeight: '600',
   display: 'flex',
   alignItems: 'center',
